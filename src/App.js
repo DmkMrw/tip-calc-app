@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import './app.scss'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <div className="bill-box">
+          <div className="left-box">
+            Left
+          </div>
+          <div className="right-box">
+            <div className="tip-amount-container">
+              <div className="tip-amount">
+                <span className="tip">Tip Amount</span>
+                <span className="person">/ person</span>
+              </div>
+              <div className="tip-amount-count">
+              $0.00
+              </div>
+            </div>
+          </div>
+        </div>
+    </>
   );
 }
 
 export default App;
+
+    //  color: hsl(172, 67%, 45%)
