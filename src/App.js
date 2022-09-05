@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import './app.scss'
+import './app.scss';
+import TipAmountPerPerson from './components/TipAmountPerPerson/TipAmountPerPerson';
+import Total from './components/Total/Total';
+
 
 const App = () => {
 
@@ -57,24 +60,8 @@ const App = () => {
           </div>
         </div>
         <div className="right-box">
-          <div className="tip-amount-container">
-            <div className="tip-amount">
-              <span className="tip">Tip Amount</span>
-              <span className="person">/ person</span>
-            </div>
-            <div className="tip-amount-count">
-            ${tipAmount}
-            </div>
-        </div>
-        <div className="tip-amount-container">
-          <div className="tip-amount">
-            <span className="tip">Total</span>
-            <span className="person">/ person</span>
-          </div>
-          <div className="tip-amount-count">
-          ${total}
-          </div>
-        </div>
+          <TipAmountPerPerson tipAmount={tipAmount} />
+          <Total total={total} />
         <button className="tip-btn" onClick={()=>handleReset()}>RESET</button>
         </div>
       </div>
