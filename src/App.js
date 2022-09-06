@@ -12,33 +12,54 @@ const App = () => {
   const [tipAmount, setTipAmount] = useState('0.00');
   const [total, setTotal] = useState('0.00');
   const [active, setActive] = useState('');
+  const [customTip, setCustomTip] = useState('')
 
 
   const handleCount = (e) => {
     setNumOfPpl(e)
-    const numberOfPeople = e;
-    const tipCorrectValue = Number(tip.lastIndexOf('%') > 0 ? tip.slice(0, -1) : tip);
-    const tipAmount = Number((Number(bill) * tipCorrectValue / 100))
-    const total = (Number(bill) + (Number(bill) * tipCorrectValue / 100)) / Number(numberOfPeople)
-    const totalResult = total.toFixed(2)
-    numberOfPeople !== '' ? setTotal(totalResult) : setTotal('0.00')
-    const tipAmountPerPerson = (tipAmount / numberOfPeople).toFixed(2);
-    numberOfPeople !== '' ? setTipAmount(tipAmountPerPerson) : setTipAmount('0.00')
+      const numberOfPeople = e;
+
+    if (customTip === '') {
+      const tipCorrectValue = Number(tip.lastIndexOf('%') > 0 ? tip.slice(0, -1) : tip);
+      const tipAmount = Number(bill) * tipCorrectValue / 100
+      const total = (Number(bill) + (Number(bill) * tipCorrectValue / 100)) / Number(numberOfPeople)
+      const totalResult = total.toFixed(2)
+      numberOfPeople !== '' ? setTotal(totalResult) : setTotal('0.00')
+      const tipAmountPerPerson = (tipAmount / numberOfPeople).toFixed(2);
+      numberOfPeople !== '' ? setTipAmount(tipAmountPerPerson) : setTipAmount('0.00')
+    } else {
+      const tipAmount = Number(bill) * customTip / 100
+      const total = (Number(bill) + (Number(bill) * customTip / 100)) / Number(numberOfPeople)
+      const totalResult = total.toFixed(2)
+      numberOfPeople !== '' ? setTotal(totalResult) : setTotal('0.00')
+      const tipAmountPerPerson = (tipAmount / numberOfPeople).toFixed(2);
+      numberOfPeople !== '' ? setTipAmount(tipAmountPerPerson) : setTipAmount('0.00')
+      setActive('');
+    }
+
   };
 
   const selectTip = (value) => {
     setActive(value)
     setTip(value)
-  }
+  };
+
+  const handleCustomTip = (value) => {
+    setCustomTip(value);
+    setActive('');
+  };
 
   const handleReset = () => {
     setBill('');
     setTip('');
+    setCustomTip('');
     setNumOfPpl('');
     setTipAmount('0.00');
     setTotal('0.00');
     setActive('');
-  }
+  };
+
+
 
   const numOfButton = ['5%', '10%','15%','25%','50%']
 
@@ -49,6 +70,7 @@ const App = () => {
           <div className="bill">
             <span className="title">Bill</span>
             <div className="bill-price">
+              <span>$</span>
               <input type="text" placeholder='0' onChange={(e) => setBill(e.target.value)} value={bill} />
             </div>
           </div>
@@ -58,7 +80,7 @@ const App = () => {
               {numOfButton.map((button) => {
                 return <div key={button} id={button} className={`tile ${active === button ? 'active' : ''}`} onClick={(e)=> selectTip(e.target.innerText)}>{button}</div>
               })}
-              <input type="text" className="tile" placeholder='Custom' onChange={(e)=> setTip(e.target.value)}/>
+              <input type="text" className="tile" placeholder='Custom' onChange={(e) => handleCustomTip(e.target.value)} value={customTip} />
             </div>
           </div>
           <div className="num-of-ppl">
@@ -77,5 +99,3 @@ const App = () => {
 }
 
 export default App;
-
-    //  color: hsl(172, 67%, 45%)
