@@ -1,5 +1,7 @@
 import './TipAmountPerPerson.scss';
 
+import PropTypes from 'prop-types';
+
 const TipAmountPerPerson = (props) => {
   return (
     <>
@@ -15,5 +17,10 @@ const TipAmountPerPerson = (props) => {
     </>
   );
 }
+
+TipAmountPerPerson.propTypes = {
+  tipAmount: PropTypes.string,
+};
+
 
 export default TipAmountPerPerson;

@@ -1,5 +1,8 @@
 import './Total.scss';
 
+import PropTypes from 'prop-types';
+
+
 const Total = (props) => {
   return (
     <>
@@ -15,5 +18,9 @@ const Total = (props) => {
     </>
   );
 }
+
+Total.propTypes = {
+  total: PropTypes.string,
+};
 
 export default Total;

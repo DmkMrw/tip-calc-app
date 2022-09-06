@@ -18,7 +18,7 @@ const App = () => {
     setNumOfPpl(e)
     const numberOfPeople = e;
     const tipCorrectValue = Number(tip.lastIndexOf('%') > 0 ? tip.slice(0, -1) : tip);
-    const tipAmount = (Number(bill) * tipCorrectValue / 100)
+    const tipAmount = Number((Number(bill) * tipCorrectValue / 100))
     const total = (Number(bill) + (Number(bill) * tipCorrectValue / 100)) / Number(numberOfPeople)
     const totalResult = total.toFixed(2)
     numberOfPeople !== '' ? setTotal(totalResult) : setTotal('0.00')
