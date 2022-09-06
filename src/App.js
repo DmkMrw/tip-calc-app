@@ -8,9 +8,10 @@ const App = () => {
 
   const [bill, setBill] = useState('');
   const [tip, setTip] = useState('');
-  const [numOfPpl, setNumOfPpl] = useState();
+  const [numOfPpl, setNumOfPpl] = useState('');
   const [tipAmount, setTipAmount] = useState('0.00');
   const [total, setTotal] = useState('0.00');
+  const [active, setActive] = useState('');
 
 
   const handleCount = (e) => {
@@ -25,13 +26,21 @@ const App = () => {
     numberOfPeople !== '' ? setTipAmount(tipAmountPerPerson) : setTipAmount('0.00')
   };
 
+  const selectTip = (value) => {
+    setActive(value)
+    setTip(value)
+  }
+
   const handleReset = () => {
     setBill('');
     setTip('');
     setNumOfPpl('');
     setTipAmount('0.00');
     setTotal('0.00');
+    setActive('');
   }
+
+  const numOfButton = ['5%', '10%','15%','25%','50%']
 
   return (
     <>
@@ -46,11 +55,9 @@ const App = () => {
           <div className="tip-select">
             <span className="title">Select Tip %</span>
             <div className="tip-tiles">
-              <div className="tile" onClick={(e)=> setTip(e.target.innerText)}>5%</div>
-              <div className="tile" onClick={(e)=> setTip(e.target.innerText)}>10%</div>
-              <div className="tile" onClick={(e)=> setTip(e.target.innerText)}>15%</div>
-              <div className="tile" onClick={(e)=> setTip(e.target.innerText)}>25%</div>
-              <div className="tile" onClick={(e)=> setTip(e.target.innerText)}>50%</div>
+              {numOfButton.map((button) => {
+                return <div key={button} id={button} className={`tile ${active === button ? 'active' : ''}`} onClick={(e)=> selectTip(e.target.innerText)}>{button}</div>
+              })}
               <input type="text" className="tile" placeholder='Custom' onChange={(e)=> setTip(e.target.value)}/>
             </div>
           </div>
